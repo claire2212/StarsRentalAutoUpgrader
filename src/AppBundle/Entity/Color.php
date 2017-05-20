@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Car;
 
 /**
  * Color
@@ -28,6 +29,15 @@ class Color
      */
     private $name;
 
+     /**
+     * One Color has Many Cars.
+     * @ORM\OneToMany(targetEntity="Car", mappedBy="color")
+     */
+     private $cars;
+
+     public function __construct() {
+        $this->cars = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -61,6 +71,30 @@ class Color
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set cars
+     *
+     * @param string $cars
+     *
+     * @return cars
+     */
+    public function setCars($cars)
+    {
+        $this->cars = $cars;
+
+        return $this;
+    }
+
+    /**
+     * Get cars
+     *
+     * @return string
+     */
+    public function getCars()
+    {
+        return $this->cars;
     }
 }
 

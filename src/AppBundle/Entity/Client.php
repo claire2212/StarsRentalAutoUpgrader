@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Booking;
 
 /**
  * Client
@@ -34,6 +35,16 @@ class Client
      * @ORM\Column(name="last_name", type="string", length=125)
      */
     private $lastName;
+
+    /**
+     * One Client has Many Bookings.
+     * @ORM\OneToMany(targetEntity="Booking", mappedBy="client")
+     */
+     private $bookings;
+
+     public function __construct() {
+        $this->bookings = new ArrayCollection();
+    }
 
 
     /**
@@ -92,6 +103,30 @@ class Client
     public function getLastName()
     {
         return $this->lastName;
+    }
+
+    /**
+     * Set bookings
+     *
+     * @param string $bookings
+     *
+     * @return bookings
+     */
+    public function setBookings($bookings)
+    {
+        $this->bookings = $bookings;
+
+        return $this;
+    }
+
+    /**
+     * Get bookings
+     *
+     * @return string
+     */
+    public function getBookings()
+    {
+        return $this->bookings;
     }
 }
 

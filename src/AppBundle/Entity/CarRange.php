@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Car;
 
 /**
  * CarRange
@@ -27,6 +28,16 @@ class CarRange
      * @ORM\Column(name="name", type="string", length=125, unique=true)
      */
     private $name;
+
+    /**
+     * One CarRange has Many Cars.
+     * @ORM\OneToMany(targetEntity="Car", mappedBy="carRange")
+     */
+     private $cars;
+
+     public function __construct() {
+        $this->cars = new ArrayCollection();
+    }
 
 
     /**
@@ -61,6 +72,30 @@ class CarRange
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set cars
+     *
+     * @param string $cars
+     *
+     * @return cars
+     */
+    public function setCars($cars)
+    {
+        $this->cars = $cars;
+
+        return $this;
+    }
+
+    /**
+     * Get cars
+     *
+     * @return string
+     */
+    public function getCars()
+    {
+        return $this->cars;
     }
 }
 

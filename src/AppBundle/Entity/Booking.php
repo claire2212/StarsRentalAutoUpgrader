@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Car;
+use AppBundle\Entity\Client;
 
 /**
  * Booking
@@ -49,6 +51,19 @@ class Booking
      */
     private $upgrade;
 
+    /**
+     * Many Bookings have One Car.
+     * @ORM\ManyToOne(targetEntity="Car", inversedBy="bookings")
+     * @ORM\JoinColumn(name="car_id", referencedColumnName="id")
+     */
+    private $car;
+
+    /**
+     * Many Bookings have One Client.
+     * @ORM\ManyToOne(targetEntity="Client", inversedBy="bookings")
+     * @ORM\JoinColumn(name="client_id", referencedColumnName="id")
+     */
+    private $client;
 
     /**
      * Get id
@@ -154,6 +169,54 @@ class Booking
     public function getUpgrade()
     {
         return $this->upgrade;
+    }
+
+    /**
+     * Set car
+     *
+     * @param string $car
+     *
+     * @return car
+     */
+    public function setCar($car)
+    {
+        $this->car = $car;
+
+        return $this;
+    }
+
+    /**
+     * Get car
+     *
+     * @return string
+     */
+    public function getCar()
+    {
+        return $this->car;
+    }
+
+    /**
+     * Set client
+     *
+     * @param string $client
+     *
+     * @return client
+     */
+    public function setClient($client)
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    /**
+     * Get client
+     *
+     * @return string
+     */
+    public function getClient()
+    {
+        return $this->client;
     }
 }
 

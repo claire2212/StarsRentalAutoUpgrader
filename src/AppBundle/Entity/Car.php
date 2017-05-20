@@ -3,6 +3,9 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Color;
+use AppBundle\Entity\CarRange;
+use AppBundle\Entity\Booking;
 
 /**
  * Car
@@ -35,6 +38,29 @@ class Car
      */
     private $available;
 
+     /**
+     * Many Cars have One Color.
+     * @ORM\ManyToOne(targetEntity="Color", inversedBy="cars")
+     * @ORM\JoinColumn(name="color_id", referencedColumnName="id")
+     */
+    private $color;
+
+    /**
+     * Many Cars have One CarRange.
+     * @ORM\ManyToOne(targetEntity="CarRange", inversedBy="cars")
+     * @ORM\JoinColumn(name="car_range_id", referencedColumnName="id")
+     */
+    private $carRange;
+
+    /**
+     * One Car has Many Bookings.
+     * @ORM\OneToMany(targetEntity="Booking", mappedBy="car")
+     */
+     private $bookings;
+
+     public function __construct() {
+        $this->bookings = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -92,6 +118,78 @@ class Car
     public function getAvailable()
     {
         return $this->available;
+    }
+
+     /**
+     * Set color
+     *
+     * @param string $color
+     *
+     * @return Color
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    /**
+     * Get color
+     *
+     * @return string
+     */
+    public function getColor()
+    {
+        return $this->color;
+    }
+
+    /**
+     * Set carRange
+     *
+     * @param string $carRange
+     *
+     * @return carRange
+     */
+    public function setCarRange($carRange)
+    {
+        $this->carRange = $carRange;
+
+        return $this;
+    }
+
+    /**
+     * Get carRange
+     *
+     * @return string
+     */
+    public function getCarRange()
+    {
+        return $this->carRange;
+    }
+
+    /**
+     * Set bookings
+     *
+     * @param string $bookings
+     *
+     * @return bookings
+     */
+    public function setBookings($bookings)
+    {
+        $this->bookings = $bookings;
+
+        return $this;
+    }
+
+    /**
+     * Get bookings
+     *
+     * @return string
+     */
+    public function getBookings()
+    {
+        return $this->bookings;
     }
 }
 
