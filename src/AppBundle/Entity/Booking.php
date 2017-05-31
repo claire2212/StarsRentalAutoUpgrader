@@ -65,6 +65,13 @@ class Booking
      */
     private $client;
 
+     public function __construct()
+    {
+        $this->startDate = new \DateTime();
+        $this->endDate = new \DateTime();
+        $this->creationDate = new \DateTime();
+    }
+
     /**
      * Get id
      *

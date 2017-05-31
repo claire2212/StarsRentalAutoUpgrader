@@ -3,9 +3,12 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Car;
+use AppBundle\Entity\Color;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Car controller.
@@ -25,9 +28,11 @@ class CarController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $cars = $em->getRepository('AppBundle:Car')->findAll();
+        $test = $em->getRepository('AppBundle:Car')->showTieFighterAvailable();
 
-        return $this->render('car/index.html.twig', array(
+        return $this->render('AppBundle::car/index.html.twig', array(
             'cars' => $cars,
+            'test' => $test
         ));
     }
 
@@ -51,7 +56,7 @@ class CarController extends Controller
             return $this->redirectToRoute('car_show', array('id' => $car->getId()));
         }
 
-        return $this->render('car/new.html.twig', array(
+        return $this->render('AppBundle::car/new.html.twig', array(
             'car' => $car,
             'form' => $form->createView(),
         ));
@@ -67,7 +72,7 @@ class CarController extends Controller
     {
         $deleteForm = $this->createDeleteForm($car);
 
-        return $this->render('car/show.html.twig', array(
+        return $this->render('AppBundle::car/show.html.twig', array(
             'car' => $car,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -88,7 +93,7 @@ class CarController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('car_edit', array('id' => $car->getId()));
+            return $this->redirectToRoute('AppBundle::car_edit', array('id' => $car->getId()));
         }
 
         return $this->render('car/edit.html.twig', array(
@@ -133,4 +138,5 @@ class CarController extends Controller
             ->getForm()
         ;
     }
+
 }

@@ -17,6 +17,10 @@
                 <th>Available</th>
                 <td>{% if car.available %}Yes{% else %}No{% endif %}</td>
             </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ car.color.name }}</td>
+            </tr>
         </tbody>
     </table>
 

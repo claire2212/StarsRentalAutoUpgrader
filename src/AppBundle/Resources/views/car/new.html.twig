@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Créer une voiture</h1>
+
+    {{ form_start(form, {'attr': {'id':'newCarForm'}}) }}
+
+        <div>
+            {{ form_label(form.name) }}    
+            {{ form_widget(form.name) }}
+        </div>
+        <div>
+            {{ form_label(form.carRange) }}
+            {{ form_widget(form.carRange) }}
+        </div>
+        <div id ='colorCar'>
+            {{ form_label(form.color) }}
+            {{ form_widget(form.color) }}
+        </div>
+        <div>
+            {{ form_label(form.available) }}    
+            {{ form_widget(form.available) }}
+        </div>
+        <input type="submit" value="Créer" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('car_index') }}">Voir la liste</a>
+        </li>
+    </ul>
+{% endblock %}

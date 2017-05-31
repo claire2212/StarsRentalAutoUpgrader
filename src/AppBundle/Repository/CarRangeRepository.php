@@ -10,4 +10,6 @@ namespace AppBundle\Repository;
  */
 class CarRangeRepository extends \Doctrine\ORM\EntityRepository
 {
+
+
 }

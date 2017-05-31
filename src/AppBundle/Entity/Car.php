@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Color;
 use AppBundle\Entity\CarRange;
 use AppBundle\Entity\Booking;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Car
@@ -168,28 +169,28 @@ class Car
         return $this->carRange;
     }
 
-    /**
-     * Set bookings
-     *
-     * @param string $bookings
-     *
-     * @return bookings
-     */
-    public function setBookings($bookings)
-    {
-        $this->bookings = $bookings;
+    // /**
+    //  * Set bookings
+    //  *
+    //  * @param string $bookings
+    //  *
+    //  * @return bookings
+    //  */
+    // public function setBookings($bookings)
+    // {
+    //     $this->bookings = $bookings;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    /**
-     * Get bookings
-     *
-     * @return string
-     */
-    public function getBookings()
-    {
-        return $this->bookings;
-    }
+    // /**
+    //  * Get bookings
+    //  *
+    //  * @return string
+    //  */
+    // public function getBookings()
+    // {
+    //     return $this->bookings;
+    // }
 }
 

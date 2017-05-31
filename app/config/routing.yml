@@ -1,3 +1,13 @@
+booking:
+    resource: '@AppBundle/Controller/BookingController.php'
+    type: annotation
+client:
+    resource: '@AppBundle/Controller/ClientController.php'
+    type: annotation
+car:
+    resource: '@AppBundle/Controller/CarController.php'
+    type: annotation
+
 app:
-    resource: '@AppBundle/Controller/'
+    resource: '@AppBundle/Controller/DefaultController.php'
     type: annotation

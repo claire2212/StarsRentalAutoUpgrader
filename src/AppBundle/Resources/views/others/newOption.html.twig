@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Créer votre couleur</h1>
+
+    {{ form_start(formColor) }}
+        {{ form_widget(formColor) }}
+        <input type="submit" value="Create" />
+    {{ form_end(formColor) }}
+
+    
+
+    <h1>Créer votre gamme</h1>
+
+    {{ form_start(formCarRange) }}
+        {{ form_widget(formCarRange) }}
+        <input type="submit" value="Create" />
+    {{ form_end(formCarRange) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('homepage') }}">Retour à l'accueil</a>
+        </li>
+    </ul>
+{% endblock %}

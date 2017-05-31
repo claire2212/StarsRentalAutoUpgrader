@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Réservations</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Date de création</th>
+                <th>Date de début</th>
+                <th>Date de fin</th>
+                <th>Client</th>
+                <th>Voiture</th>
+                <th>Surclassé</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.creationDate | date('m d Y ') }}</td>
+                <td>{{ booking.startDate | date('m d Y ') }}</td>
+                <td>{{ booking.endDate | date('d m Y') }}</td>
+                <td>{{ booking.Client.lastName}}{{ booking.Client.firstName}}</td>
+                <td>{{ booking.car.name}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('booking_new') }}">Créer une réservation</a>
+        </li>
+    </ul>
+{% endblock %}

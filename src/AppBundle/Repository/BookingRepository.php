@@ -2,6 +2,9 @@
 
 namespace AppBundle\Repository;
 
+
+use Doctrine\ORM\Query\Expr\Join;
+
 /**
  * BookingRepository
  *
@@ -10,4 +13,28 @@ namespace AppBundle\Repository;
  */
 class BookingRepository extends \Doctrine\ORM\EntityRepository
 {
+     public function showAllByDate()
+    {
+            return $this->createQueryBuilder('b')
+
+            ->orderBy('b.creationDate','DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+      public function bookingsPerClientPerMonth($client,$firstDayInMonth, $lastDayInMonth)
+    {
+        return $this->createQueryBuilder('b')
+            ->innerJoin('b.client', 'cl', Join::WITH, 'b.client = cl.id')
+            ->select('cl.lastName')
+            ->where('b.client = :client')
+            ->andWhere('b.startDate BETWEEN :from AND :to')
+            ->setParameter('client', $client)
+            ->setParameter('from', $firstDayInMonth )
+            ->setParameter('to', $lastDayInMonth)
+            ->getQuery()
+            ->getResult();
+    }
 }
+
+

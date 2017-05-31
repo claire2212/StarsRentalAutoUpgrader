@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Créer une réservation</h1>
+
+    {{ form_start(form, {'attr':{'id':'newBooking'}}) }}
+
+        {{ form_row(form.startDate) }}
+        {{ form_row(form.endDate) }}
+        {{ form_row(form.client) }}
+        {{ form_row(form.car) }}
+        <div id="upgrade">
+            {{ form_row(form.upgrade) }}
+        </div>
+        <div class ='result'></div>
+        <input type="submit" value="Créer" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('booking_all') }}">Voir la liste</a>
+        </li>
+    </ul>
+{% endblock %}

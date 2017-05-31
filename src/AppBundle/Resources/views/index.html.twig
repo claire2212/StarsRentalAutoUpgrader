@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1>Bienvenue chez StarsRental</h1>
+
+<h2>Créer une réservation</h2>
+   <a href="{{ path('booking_new') }}"><button>Réservation</button></a>
+
+<h2>Créer un client</h2>
+    <a href="{{ path('client_new') }}"><button>Client</button></a>
+
+
+<h2>Créer une voiture</h2>
+    <a href="{{ path('car_new') }}"><button>Voiture</button></a>
+
+{% endblock %}

@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+
+
 /**
  * CarRepository
  *
@@ -9,5 +11,50 @@ namespace AppBundle\Repository;
  * repository methods below.
  */
 class CarRepository extends \Doctrine\ORM\EntityRepository
-{
+{   
+
+    public function findAllXWing()
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.carRange = :carRange')
+            ->setParameter('carRange', 1)
+            ->getQuery()
+            ->getResult();
+    }
+
+
+    public function showXWingAvailable()
+    {
+        return $this->createQueryBuilder('c')
+            ->select('count(c.name)')
+            ->where('c.carRange = :carRange')
+            ->andWhere('c.available = :available')
+            ->setParameter('carRange', 1)
+            ->setParameter('available', 1)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+
+    public function findAllTieFighter()
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.carRange = :carRange')
+            ->setParameter('carRange', 2)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function showTieFighterAvailable()
+    {
+        return $this->createQueryBuilder('c')
+            ->select('count(c.name)')
+            ->where('c.carRange = :carRange')
+            ->andWhere('c.available = :available')
+            ->setParameter('carRange', 2)
+            ->setParameter('available', 1)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
 }

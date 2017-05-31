@@ -6,27 +6,21 @@
     <table>
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Firstname</th>
                 <th>Lastname</th>
-                <th>Actions</th>
+                <th>Réservations</th>
             </tr>
         </thead>
         <tbody>
         {% for client in clients %}
             <tr>
-                <td><a href="{{ path('client_show', { 'id': client.id }) }}">{{ client.id }}</a></td>
                 <td>{{ client.firstName }}</td>
                 <td>{{ client.lastName }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('client_show', { 'id': client.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('client_edit', { 'id': client.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                <td>  
+                    {% for booking in client.bookings %} 
+                        {{booking.creationDate | date('d-m-Y')}}<br>
+                        
+                    {% endfor %}
                 </td>
             </tr>
         {% endfor %}
