@@ -71,8 +71,12 @@ class BookingController extends Controller
     {   
 
         $dataClient= $_POST['$dataClient'];
-        $dataStartDate =new DateTime($_POST['$dataStartDate']);
-        $dataStartDate = $dataStartDate->format('Y-m-d');
+
+        $em = $this->getDoctrine()->getManager();
+        $client = $em->getRepository('AppBundle:Client')->find($dataClient);
+        $clientLastName = $client->getLastName();
+        $clientFirstName = $client->getFirstName();
+
         $dataCar = $_POST['$dataCar'];
 
         $em = $this->getDoctrine()->getManager();
@@ -116,21 +120,10 @@ class BookingController extends Controller
             else{
                 $availableTieFighter = false;
             }
-        
-            
-            
-            $dataStartDate = new DateTime($dataStartDate);
-
-            //on récupère le dernier jour du mois
-            $lastDayInMonth = $dataStartDate->format('Y-m-t');
             
 
-            // on récupère le premier jour du mois
-            $firstDayInMonth = $dataStartDate->format('Y-m-01');
-            
-
-            //on va chercher les résevration d'un client sur le mois en cours
-            $clientBooking = $em->getRepository('AppBundle:Booking')->bookingsPerClientPerMonth($dataClient, $firstDayInMonth, $lastDayInMonth);
+            //on va chercher les résevration d'un client sur les 30 derniers jours
+            $clientBooking = $em->getRepository('AppBundle:Booking')->bookingsPerClientPerMonth($dataClient);
             $clientBooking = count($clientBooking);
             if($clientBooking > 2){
                 $clientBooking = true;
@@ -157,6 +150,10 @@ class BookingController extends Controller
             //echo "Il n\'existe pas de gamme supérieure";
             
         } 
-        return new JsonResponse(["response" =>"$upgrade"]); 
+        return new JsonResponse([
+            "upgrade" =>"$upgrade",
+            "lastName"=>"$clientLastName",
+            "firstName"=>"$clientFirstName"
+        ]); 
     }
 }

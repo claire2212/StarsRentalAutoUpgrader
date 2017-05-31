@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use \DateTime;
 
 use Doctrine\ORM\Query\Expr\Join;
 
@@ -22,16 +23,16 @@ class BookingRepository extends \Doctrine\ORM\EntityRepository
             ->getResult();
     }
 
-      public function bookingsPerClientPerMonth($client,$firstDayInMonth, $lastDayInMonth)
+    public function bookingsPerClientPerMonth($client)
     {
         return $this->createQueryBuilder('b')
             ->innerJoin('b.client', 'cl', Join::WITH, 'b.client = cl.id')
             ->select('cl.lastName')
             ->where('b.client = :client')
-            ->andWhere('b.startDate BETWEEN :from AND :to')
+            ->andWhere('b.creationDate BETWEEN :from AND :to')
             ->setParameter('client', $client)
-            ->setParameter('from', $firstDayInMonth )
-            ->setParameter('to', $lastDayInMonth)
+            ->setParameter('from',new \DateTime('-30 days'), \Doctrine\DBAL\Types\Type::DATETIME)
+            ->setParameter('to', new \DateTime()) 
             ->getQuery()
             ->getResult();
     }

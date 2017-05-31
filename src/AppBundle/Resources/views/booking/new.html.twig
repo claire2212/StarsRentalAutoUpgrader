@@ -8,11 +8,16 @@
         {{ form_row(form.startDate) }}
         {{ form_row(form.endDate) }}
         {{ form_row(form.client) }}
+        
+        
         {{ form_row(form.car) }}
+
+
         <div id="upgrade">
             {{ form_row(form.upgrade) }}
         </div>
-        <div class ='result'></div>
+        <div class='msg'></div>
+        <div class ='errors'></div>
         <input type="submit" value="Créer" />
     {{ form_end(form) }}
 

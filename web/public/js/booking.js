@@ -12,8 +12,6 @@ $(document).ready(function(){
         var car = $('#appbundle_booking_car')
         var dataCar = car.val()
 
-    
-        //var upgrade =$('#appbundle_booking_upgrade')  
         client.change(function(){
             dataClient = client.val()
         });
@@ -25,7 +23,7 @@ $(document).ready(function(){
         startDate.change(function(){
             dataStartDate = startDate.val()
         })
-        //console.log(startDate)
+        
         
         
     var jqXHR =  $.ajax({
@@ -37,15 +35,26 @@ $(document).ready(function(){
                 $dataStartDate :dataStartDate,
                 $dataCar : dataCar
             },
-            //contentType: application/json,
+            statusCode: {
+                404: function() {
+                    $('.errors').html("Veuillez remplir tous les champs" );
+                },
+                500: function() {
+                    $('.errors').html("Veuillez remplir tous les champs" );
+                }
+            },
             dataType: "json",
             success: function(dataReturn) {
-                 if(jqXHR.readyState == 4 && jqXHR.status == 200 && dataReturn.response == '1' ){
+                 if(jqXHR.readyState == 4 && jqXHR.status == 200 && dataReturn.upgrade == '1' ){
                     //console.log(dataReturn.response)
                     $('#upgrade').show()
+                    $('.msg').html(dataReturn.firstName +' ' + dataReturn.lastName +' a le droit d’être surclassé sur les TieFighters')
+                    $('.errors').hide()
                  }
                  else if(jqXHR.readyState == 4 && jqXHR.status == 200 && dataReturn.response == '' ){
-                     $('#upgrade').hide()
+                    $('#upgrade').hide()
+                    $('.msg').html(dataReturn.firstName +' ' + dataReturn.lastName + ' ne peut être surclassé sur les TieFighters et doit donc rester sur les XWing')
+                    $('.errors').hide()
                  }
             },
             error: function(jqXHR, textStatus, errorThrown) {

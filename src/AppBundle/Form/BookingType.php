@@ -32,6 +32,7 @@ class BookingType extends AbstractType
                 'choice_label' => 'lastName',
                 'multiple'     => false,
                 'expanded'     => false,
+                'placeholder'  => 'Choisir un client',
                 'query_builder' => function (\AppBundle\Repository\ClientRepository $er) {
                     return $er->createQueryBuilder('c')
                               ->orderBy('c.lastName', 'ASC');
@@ -42,6 +43,11 @@ class BookingType extends AbstractType
                 'choice_label' => 'name',
                 'multiple'     => false,
                 'expanded'     => false,
+                'placeholder'  => 'Choisir une voiture',
+                'query_builder' => function (\AppBundle\Repository\CarRepository $er) {
+                    return $er->createQueryBuilder('car')
+                              ->where('car.available = 1');
+                    }
             ])
             ->add('upgrade');
 
