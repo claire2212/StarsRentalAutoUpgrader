@@ -1,8 +1,6 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
 {% block body %}
-
-<h1>Bienvenue chez StarsRental</h1>
 
 <h2>Réservation</h2>
    <a href="{{ path('booking_new') }}"><button>Creér une réservation</button></a>
@@ -16,5 +14,8 @@
 <h2>Voiture</h2>
     <a href="{{ path('car_new') }}"><button>Créer une voiture</button></a>
     <a href="{{ path('car_index') }}"><button>Voir les voitures</button></a>
+
+<h2>Options</h2>
+    <a href="{{ path('option_new') }}"><button>Créer une couleur ou une gamme</button></a>
 
 {% endblock %}
