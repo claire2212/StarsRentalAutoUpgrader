@@ -51,7 +51,7 @@ $(document).ready(function(){
                     $('.msg').html(dataReturn.firstName +' ' + dataReturn.lastName +' a le droit d’être surclassé sur les TieFighters')
                     $('.errors').hide()
                  }
-                 else if(jqXHR.readyState == 4 && jqXHR.status == 200 && dataReturn.response == '' ){
+                 else if(jqXHR.readyState == 4 && jqXHR.status == 200 && dataReturn.upgrade == '' ){
                     $('#upgrade').hide()
                     $('.msg').html(dataReturn.firstName +' ' + dataReturn.lastName + ' ne peut être surclassé sur les TieFighters')
                     $('.errors').hide()

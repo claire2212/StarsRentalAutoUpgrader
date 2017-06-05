@@ -53,9 +53,12 @@ class BookingController extends Controller
                 $car =$em->getRepository('AppBundle:Car')->find($carUpgraded);
                 $booking->setCar($car);
             };
-            
+
+
+        
             //on passe la dispo de la voiture à false lors de la réservation
             $booking->getCar()->setAvailable(false);
+            
           
             $em->persist($booking);
             $em->flush();
