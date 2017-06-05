@@ -57,4 +57,15 @@ class CarRepository extends \Doctrine\ORM\EntityRepository
             ->getSingleScalarResult();
     }
 
+      public function findOneTieFighterAvailable()
+    {
+        return $this->createQueryBuilder('c')
+            ->select('c.id')
+            ->where('c.carRange = 2')
+            ->andWhere('c.available = 1')
+            ->getQuery()
+            ->setMaxResults(1)
+            ->getResult();
+    }
+
 }

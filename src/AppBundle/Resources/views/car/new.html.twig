@@ -24,9 +24,6 @@
         <input type="submit" value="Créer" />
     {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('car_index') }}">Voir la liste</a>
-        </li>
-    </ul>
+    <a href="{{ path('car_index') }}"><button>Voir la liste</button></a>
+
 {% endblock %}

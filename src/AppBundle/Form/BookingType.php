@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Icme\ActionBundle\Form\DataTransformer\BookingTransformer;
 
 class BookingType extends AbstractType
 {
@@ -70,6 +71,5 @@ class BookingType extends AbstractType
     {
         return 'appbundle_booking';
     }
-
 
 }

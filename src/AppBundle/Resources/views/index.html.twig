@@ -4,14 +4,17 @@
 
 <h1>Bienvenue chez StarsRental</h1>
 
-<h2>Créer une réservation</h2>
-   <a href="{{ path('booking_new') }}"><button>Réservation</button></a>
+<h2>Réservation</h2>
+   <a href="{{ path('booking_new') }}"><button>Creér une réservation</button></a>
+   <a href="{{ path('booking_index') }}"><button>Voir les réservations</button></a>
 
-<h2>Créer un client</h2>
-    <a href="{{ path('client_new') }}"><button>Client</button></a>
+<h2>Client</h2>
+    <a href="{{ path('client_new') }}"><button>Creér un client</button></a>
+    <a href="{{ path('client_index') }}"><button>Voir les clients</button></a>
 
 
-<h2>Créer une voiture</h2>
-    <a href="{{ path('car_new') }}"><button>Voiture</button></a>
+<h2>Voiture</h2>
+    <a href="{{ path('car_new') }}"><button>Créer une voiture</button></a>
+    <a href="{{ path('car_index') }}"><button>Voir les voitures</button></a>
 
 {% endblock %}

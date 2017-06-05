@@ -14,16 +14,15 @@
 
 
         <div id="upgrade">
-            {{ form_row(form.upgrade) }}
+            {{ form_row(form.upgrade) }}      
+            {{ form_row(form.car) }}
         </div>
         <div class='msg'></div>
         <div class ='errors'></div>
         <input type="submit" value="Créer" />
     {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('booking_all') }}">Voir la liste</a>
-        </li>
-    </ul>
+
+    <a href="{{ path('booking_index') }}"><button>Voir la liste</button></a>
+
 {% endblock %}

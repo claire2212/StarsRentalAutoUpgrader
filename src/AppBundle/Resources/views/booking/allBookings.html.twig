@@ -3,7 +3,7 @@
 {% block body %}
     <h1>Réservations</h1>
 
-    <table>
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Date de création</th>
@@ -17,19 +17,18 @@
         <tbody>
         {% for booking in bookings %}
             <tr>
-                <td>{{ booking.creationDate | date('m d Y ') }}</td>
-                <td>{{ booking.startDate | date('m d Y ') }}</td>
-                <td>{{ booking.endDate | date('d m Y') }}</td>
-                <td>{{ booking.Client.lastName}}{{ booking.Client.firstName}}</td>
+                <td>{{ booking.creationDate | date('d-m-Y ') }}</td>
+                <td>{{ booking.startDate | date('d-m-Y ') }}</td>
+                <td>{{ booking.endDate | date('d-m-Y') }}</td>
+                <td>{{ booking.Client.lastName}} {{ booking.Client.firstName}}</td>
                 <td>{{ booking.car.name}}</td>
+                <td>{% if booking.upgrade %}X{% else %}-{% endif %}</td></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('booking_new') }}">Créer une réservation</a>
-        </li>
-    </ul>
+
+    <a href="{{ path('booking_new') }}"><button>Créer une réservation</button></a>
+
 {% endblock %}

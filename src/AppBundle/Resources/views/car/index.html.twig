@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-{{test}}
-    <h1>Cars list</h1>
 
-    <table>
+    <h1>Voitures</h1>
+
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
-                <th>Available</th>
+                <th>Nom</th>
+                <th>Disponible</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -18,25 +18,16 @@
             <tr>
                 <td><a href="{{ path('car_show', { 'id': car.id }) }}">{{ car.id }}</a></td>
                 <td>{{ car.name }}</td>
-                <td>{% if car.available %}Yes{% else %}No{% endif %}</td>
+                <td>{% if car.available %}Oui{% else %}Non{% endif %}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('car_show', { 'id': car.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('car_edit', { 'id': car.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <a href="{{ path('car_edit', { 'id': car.id }) }}">Modifier</a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('car_new') }}">Create a new car</a>
-        </li>
-    </ul>
+
+    <a href="{{ path('car_new') }}"><button>Créer une nouvelle voiture</button></a>
+
 {% endblock %}

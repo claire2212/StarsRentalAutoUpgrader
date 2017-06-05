@@ -1,16 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>CRéer un client</h1>
+    <h1>Créer un client</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
         <input type="submit" value="Créer" />
     {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('client_index') }}">Voir la liste</a>
-        </li>
-    </ul>
+    <div>
+        <a href="{{ path('client_index') }}"><button>Voir la liste</button></a>
+    </div>
 {% endblock %}

@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Clients list</h1>
+    <h1>Clients</h1>
 
-    <table>
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>Firstname</th>
-                <th>Lastname</th>
+                <th>Prénom</th>
+                <th>Nom de Famille</th>
                 <th>Réservations</th>
             </tr>
         </thead>
@@ -22,14 +22,12 @@
                         
                     {% endfor %}
                 </td>
+                <td> <a href="{{ path('client_edit', { 'id': client.id }) }}">Modifier</a></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('client_new') }}">Create a new client</a>
-        </li>
-    </ul>
+    <a href="{{ path('client_new') }}"><button>Créer un nouveau client</button></a>
+
 {% endblock %}

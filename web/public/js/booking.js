@@ -53,7 +53,7 @@ $(document).ready(function(){
                  }
                  else if(jqXHR.readyState == 4 && jqXHR.status == 200 && dataReturn.response == '' ){
                     $('#upgrade').hide()
-                    $('.msg').html(dataReturn.firstName +' ' + dataReturn.lastName + ' ne peut être surclassé sur les TieFighters et doit donc rester sur les XWing')
+                    $('.msg').html(dataReturn.firstName +' ' + dataReturn.lastName + ' ne peut être surclassé sur les TieFighters')
                     $('.errors').hide()
                  }
             },

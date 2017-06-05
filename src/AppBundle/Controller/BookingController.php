@@ -13,7 +13,22 @@ use \DateTime;
 
 class BookingController extends Controller
 {
-   
+    /**
+     * Lists all Bokkings entities
+     *
+     * @Route("/bookings", name="booking_index")
+     * @Method("GET")
+     */
+    public function allBbokingsAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $bookings = $em->getRepository('AppBundle:Booking')->showAllByDate();
+
+        return $this->render('AppBundle::booking/allBookings.html.twig', array(
+            'bookings' => $bookings,
+        ));
+    }
 
       /**
      * Creates a new booking entity.
@@ -29,12 +44,23 @@ class BookingController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            
+            //si le client peut être surclassé on lui affecte une voiture 
+            //de la gamme supérieure de manière aléatoire
+            if($booking->getUpgrade() == true){
+                $carUpgraded = $em->getRepository('AppBundle:Car')->findOneTieFighterAvailable();
+                $carUpgraded = $carUpgraded[0]['id'];
+                $car =$em->getRepository('AppBundle:Car')->find($carUpgraded);
+                $booking->setCar($car);
+            };
+            
             //on passe la dispo de la voiture à false lors de la réservation
-            $carAvailable = $booking->getCar()->setAvailable(false);
+            $booking->getCar()->setAvailable(false);
+          
             $em->persist($booking);
             $em->flush();
 
-            return $this->redirectToRoute('booking_all');
+            return $this->redirectToRoute('booking_index');
         }
 
         return $this->render('AppBundle::booking/new.html.twig', array(
@@ -44,22 +70,7 @@ class BookingController extends Controller
         ));
     }
 
-     /**
-     * Lists all Bokkings entities
-     *
-     * @Route("/bookings", name="booking_all")
-     * @Method("GET")
-     */
-    public function allBbokingsAction()
-    {
-        $em = $this->getDoctrine()->getManager();
 
-        $bookings = $em->getRepository('AppBundle:Booking')->showAllByDate();
-
-        return $this->render('AppBundle::booking/allBookings.html.twig', array(
-            'bookings' => $bookings,
-        ));
-    }
 
       /**
      * Upgrade XWing
@@ -105,7 +116,7 @@ class BookingController extends Controller
             }
             
 
-            //on calcule le nombre totalde Tie Fighter
+            //on calcule le nombre total de Tie Fighter
             $allTieFighter = $em->getRepository('AppBundle:Car')->findAllTieFighter();
             $allTieFighter = count($allTieFighter);
             //on va chercher le nbre de TieFighter disponibles
@@ -135,21 +146,17 @@ class BookingController extends Controller
             // on vérifie que les trois conditions sont respectées
             if($availableXWing && $availableTieFighter && $clientBooking){
                 $upgrade = true;
-                
-                
             }
             else{
-                $upgrade = false;
-                //echo "Vous ne pouvez pas être surclassé";
-                
+                $upgrade = false;                
             }
        
         }
         else{
             $upgrade = false;
-            //echo "Il n\'existe pas de gamme supérieure";
             
         } 
+        
         return new JsonResponse([
             "upgrade" =>"$upgrade",
             "lastName"=>"$clientLastName",
